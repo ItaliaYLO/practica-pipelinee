@@ -1,0 +1,37 @@
+name: Laboratorio de Pipeline Sistemicos
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  Validacion:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Validando..." && sleep 5
+
+  Build:
+    needs: Validacion
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Compilando..." && sleep 5
+
+  Test_Frontend:
+    needs: Build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Probando frontend..." && sleep 5
+
+  Seguridad:
+    needs: Test_Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Escaneo de seguridad..." && sleep 5
+
+  Deploy:
+    needs: Seguridad
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploy exitoso"
